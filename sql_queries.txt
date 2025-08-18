@@ -1,0 +1,62 @@
+
+# Show the title and director name for all films
+SELECT f.title, p.name FROM films f
+LEFT JOIN people p ON p.id = f.director_fk
+
+
+# Show the title, director and star name for all films
+SELECT f.title, director.name AS director_name, writer.name AS writer_name, star.name AS star_name FROM films f
+LEFT JOIN people director ON director.id = f.director_fk
+LEFT JOIN people writer ON writer.id = f.writer_fk
+LEFT JOIN people star ON star.id = f.star_fk
+
+
+# Show the title of films where the director is from the USA
+SELECT f.title FROM films f
+LEFT JOIN people p ON p.id = f.director_fk
+LEFT JOIN countries c ON c.id = p.country_fk
+WHERE c.countryname = 'USA'
+
+
+# Show only those films where the writer and the director are the same person
+SELECT f.title FROM films f
+WHERE f.director_fk = f.writer_fk;
+
+
+# Show directors and film titles for films with a score of 8 or higher
+SELECT f.title, p.name FROM films f
+LEFT JOIN people p ON p.id = f.director_fk
+WHERE f.score > 7
+
+
+# Make at least 5 more queries to demonstrate your understanding of joins, and other relationships between tables.
+
+#6
+SELECT f.title FROM films f
+WHERE NOT f.director_fk = f.writer_fk;
+
+#7
+SELECT f.title FROM films f
+WHERE f.score > 8 AND f.year > 1985
+
+#8 TODO
+SELECT f.title FROM films f
+LEFT JOIN people p On p.id = f.star_fk
+WHERE p.dob = '1974-11-11'
+
+#9
+SELECT p.name FROM films f
+LEFT JOIN filmcast fc ON fc.star_id_fk = f.star_fk
+LEFT JOIN people p ON p.id = fc.star_id_fk
+WHERE f.YEAR < 1980;
+
+#10
+SELECT p.name FROM people p
+WHERE dob = '1974-11-11'
+
+
+
+
+
+
+todo cast
