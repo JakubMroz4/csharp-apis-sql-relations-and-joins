@@ -9,6 +9,7 @@ dob DATE
 );
 
 
+
 CREATE TABLE Countries(
 id serial PRIMARY KEY,
 countryname VARCHAR (50) NOT NULL
@@ -17,18 +18,29 @@ countryname VARCHAR (50) NOT NULL
 
 CREATE TABLE Films(
 id serial PRIMARY KEY,
-title VARCHAR (200) NOT NULL,
-director_fk INTEGER NOT NULL,
-writer_fk INTEGER NOT NULL,
-star_fk INTEGER NOT NULL,
+title VARCHAR (200),
 year INTEGER NOT NULL,
 genre VARCHAR (50),
 score INTEGER
 );
 
+CREATE TABLE Directors(
+id serial PRIMARY KEY,
+film_fk INTEGER NOT NULL,
+person_fk INTEGER NOT NULL
+
+);
+
+CREATE TABLE Writers(
+id serial PRIMARY KEY,
+film_fk INTEGER NOT NULL,
+person_fk INTEGER NOT NULL
+);
+
 CREATE TABLE FilmCast(
-film_id_fk INTEGER NOT NULL,
-star_id_fk INTEGER NOT NULL
+id serial PRIMARY KEY,
+film_fk INTEGER NOT NULL,
+person_fk INTEGER NOT NULL
 );
 
 
@@ -77,30 +89,64 @@ INSERT INTO people (name, email, country_fk, dob) VALUES ('Erik Hazelhoff Roelfz
 INSERT INTO people (name, email, country_fk, dob) VALUES ('Edmon Rostand', 'edmond@rostand.com', NULL, NULL);
 
 
-INSERT INTO films (title, director_fk, writer_fk, star_fk, year, genre, score) VALUES ('2001: A Space Odyssey', 1, 21, 11, 1968, 'Science Fiction', 10);
-INSERT INTO films (title, director_fk, writer_fk, star_fk, year, genre, score) VALUES ('Star Wars: A New Hope', 2, 2, 12, 1977, 'Science Fiction', 7);
-INSERT INTO films (title, director_fk, writer_fk, star_fk, year, genre, score) VALUES ('To Kill A Mockingbird', 3, 22, 13, 1962, 'Drama', 10);
-INSERT INTO films (title, director_fk, writer_fk, star_fk, year, genre, score) VALUES ('Titanic', 4, 4, 14, 1997, 'Romance', 5);
-INSERT INTO films (title, director_fk, writer_fk, star_fk, year, genre, score) VALUES ('Dr Zhivago', 5, 23, 15, 1965, 'Historical', 8);
+INSERT INTO films (title, year, genre, score) VALUES ('2001: A Space Odyssey', 1968, 'Science Fiction', 10);
+INSERT INTO films (title, year, genre, score) VALUES ('Star Wars: A New Hope', 1977, 'Science Fiction', 7);
+INSERT INTO films (title, year, genre, score) VALUES ('To Kill A Mockingbird', 1962, 'Drama', 10);
+INSERT INTO films (title, year, genre, score) VALUES ('Titanic', 1997, 'Romance', 5);
+INSERT INTO films (title, year, genre, score) VALUES ('Dr Zhivago', 1965, 'Historical', 8);
 
-INSERT INTO films (title, director_fk, writer_fk, star_fk, year, genre, score) VALUES ('El Cid', 6, 24, 16, 1961, 'Historical', 6);
-INSERT INTO films (title, director_fk, writer_fk, star_fk, year, genre, score) VALUES ('Voyage to Cythera', 7, 7, 17, 1984, 'Drama', 8);
-INSERT INTO films (title, director_fk, writer_fk, star_fk, year, genre, score) VALUES ('Soldier of Orange', 8, 25, 18, 1977, 'Thriller', 8);
-INSERT INTO films (title, director_fk, writer_fk, star_fk, year, genre, score) VALUES ('Three Colours: Blue', 9, 9, 19, 1993, 'Drama', 8);
-INSERT INTO films (title, director_fk, writer_fk, star_fk, year, genre, score) VALUES ('Cyrano de Bergerac', 10, 26, 20, 1990, 'Historical', 9);
+INSERT INTO films (title, year, genre, score) VALUES ('El Cid', 1961, 'Historical', 6);
+INSERT INTO films (title, year, genre, score) VALUES ('Voyage to Cythera', 1984, 'Drama', 8);
+INSERT INTO films (title, year, genre, score) VALUES ('Soldier of Orange', 1977, 'Thriller', 8);
+INSERT INTO films (title, year, genre, score) VALUES ('Three Colours: Blue', 1993, 'Drama', 8);
+INSERT INTO films (title, year, genre, score) VALUES ('Cyrano de Bergerac', 1990, 'Historical', 9);
+
+-- director table
+INSERT INTO directors (film_fk, person_fk) VALUES (1, 1);
+INSERT INTO directors (film_fk, person_fk) VALUES (2, 2);
+INSERT INTO directors (film_fk, person_fk) VALUES (3, 3);
+INSERT INTO directors (film_fk, person_fk) VALUES (4, 4);
+INSERT INTO directors (film_fk, person_fk) VALUES (5, 5);
+
+INSERT INTO directors (film_fk, person_fk) VALUES (6, 6);
+INSERT INTO directors (film_fk, person_fk) VALUES (7, 7);
+INSERT INTO directors (film_fk, person_fk) VALUES (8, 8);
+INSERT INTO directors (film_fk, person_fk) VALUES (9, 9);
+INSERT INTO directors (film_fk, person_fk) VALUES (10, 10);
+
+-- writers table 
+INSERT INTO writers (film_fk, person_fk) VALUES (1, 11);
+INSERT INTO writers (film_fk, person_fk) VALUES (2, 2);
+INSERT INTO writers (film_fk, person_fk) VALUES (3, 22);
+INSERT INTO writers (film_fk, person_fk) VALUES (4, 4);
+INSERT INTO writers (film_fk, person_fk) VALUES (5, 23);
+INSERT INTO writers (film_fk, person_fk) VALUES (6, 24);
+INSERT INTO writers (film_fk, person_fk) VALUES (7, 7);
+INSERT INTO writers (film_fk, person_fk) VALUES (8, 25);
+INSERT INTO writers (film_fk, person_fk) VALUES (9, 9);
+INSERT INTO writers (film_fk, person_fk) VALUES (10, 26);
+
+-- cast film
+INSERT INTO filmcast (film_fk, person_fk) VALUES (1, 11);
+INSERT INTO filmcast (film_fk, person_fk) VALUES (2, 12);
+INSERT INTO filmcast (film_fk, person_fk) VALUES (3, 13);
+INSERT INTO filmcast (film_fk, person_fk) VALUES (4, 14);
+INSERT INTO filmcast (film_fk, person_fk) VALUES (5, 15);
+
+INSERT INTO filmcast (film_fk, person_fk) VALUES (6, 16);
+INSERT INTO filmcast (film_fk, person_fk) VALUES (7, 17);
+INSERT INTO filmcast (film_fk, person_fk) VALUES (8, 18);
+INSERT INTO filmcast (film_fk, person_fk) VALUES (9, 19);
+INSERT INTO filmcast (film_fk, person_fk) VALUES (10, 20);
 
 
-INSERT INTO filmcast (film_id_fk, star_id_fk) VALUES (1, 11);
-INSERT INTO filmcast (film_id_fk, star_id_fk) VALUES (2, 12);
-INSERT INTO filmcast (film_id_fk, star_id_fk) VALUES (3, 13);
-INSERT INTO filmcast (film_id_fk, star_id_fk) VALUES (4, 14);
-INSERT INTO filmcast (film_id_fk, star_id_fk) VALUES (5, 15);
 
-INSERT INTO filmcast (film_id_fk, star_id_fk) VALUES (6, 16);
-INSERT INTO filmcast (film_id_fk, star_id_fk) VALUES (7, 17);
-INSERT INTO filmcast (film_id_fk, star_id_fk) VALUES (8, 18);
-INSERT INTO filmcast (film_id_fk, star_id_fk) VALUES (9, 19);
-INSERT INTO filmcast (film_id_fk, star_id_fk) VALUES (10, 20);
+
+
+
+
+
+
 
 
 
